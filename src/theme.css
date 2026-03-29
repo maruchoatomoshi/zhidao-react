@@ -1,299 +1,111 @@
-/* ===== ZHIDAO PROTOCOL v2.6.6 — CSS VARIABLES ===== */
-/* Exact copy from index_reference.html */
-
 :root {
-  /* === NETWATCH DARK (default) === */
-  --red: #cc2200;
-  --red-dim: rgba(180, 20, 20, 0.15);
-  --red-border: rgba(180, 20, 20, 0.35);
+  /* === NETWATCH DARK (По умолчанию) === */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a25;
+  --bg-nav: rgba(18, 18, 26, 0.85);
   
-  --gold: #d4af37;
-  --gold-dim: rgba(212, 175, 55, 0.1);
-  --gold-border: rgba(212, 175, 55, 0.25);
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --text-muted: #606070;
   
-  --bg: #050510;
-  --bg2: rgba(255, 255, 255, 0.03);
-  --bg3: rgba(255, 255, 255, 0.06);
+  --accent-primary: #00f0ff; /* Cyan */
+  --accent-secondary: #7000ff; /* Purple */
+  --accent-gradient: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
   
-  --border: rgba(255, 255, 255, 0.07);
+  --border-color: rgba(0, 240, 255, 0.2);
+  --shadow-glow: 0 0 10px rgba(0, 240, 255, 0.3);
   
-  --text: #ffffff;
-  --text2: #cccccc;
-  --text3: #888888;
+  --success: #00ff9d;
+  --warning: #ffb800;
+  --danger: #ff0055;
   
-  --purple: #9b59b6;
-  --purple-dim: rgba(155, 89, 182, 0.15);
-  --purple-border: rgba(155, 89, 182, 0.3);
-  
-  --blue: #3498db;
-  --blue-dim: rgba(52, 152, 219, 0.15);
-  --blue-border: rgba(52, 152, 219, 0.3);
-  
-  --nav-h: 68px;
-  --font-ui: -apple-system, sans-serif;
+  --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --card-radius: 12px;
   --btn-radius: 8px;
-  --card-radius: 10px;
-  --scan-opacity: 0.025;
   
-  /* === SUCCESS / ERROR === */
-  --success: #2ecc71;
-  --error: #ff4444;
+  --scanline-color: rgba(0, 0, 0, 0.5);
+  --glyph-color: rgba(0, 240, 255, 0.03);
 }
 
-/* ===== NETWATCH LIGHT ===== */
+/* === NETWATCH LIGHT === */
 body.theme-nw-light {
-  --red: #993333;
-  --red-dim: rgba(180, 20, 20, 0.08);
-  --red-border: rgba(180, 20, 20, 0.22);
+  --bg-primary: #f0f0f5;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(255, 255, 255, 0.85);
   
-  --gold: #7a5010;
-  --gold-dim: rgba(150, 100, 20, 0.1);
-  --gold-border: rgba(150, 100, 20, 0.25);
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5e;
+  --text-muted: #8a8a9e;
   
-  --bg: #f4f1ed;
-  --bg2: rgba(0, 0, 0, 0.03);
-  --bg3: rgba(0, 0, 0, 0.05);
+  --accent-primary: #00c4cc;
+  --accent-secondary: #5a00cc;
+  --accent-gradient: linear-gradient(135deg, #00c4cc 0%, #5a00cc 100%);
   
-  --border: rgba(0, 0, 0, 0.08);
+  --border-color: rgba(0, 196, 204, 0.2);
+  --shadow-glow: 0 0 10px rgba(0, 196, 204, 0.2);
   
-  --text: #1a1a1a;
-  --text2: #555555;
-  --text3: #999999;
-  
-  --scan-opacity: 0.01;
+  --scanline-color: rgba(0, 0, 0, 0.03);
+  --glyph-color: rgba(0, 196, 204, 0.05);
 }
 
-/* ===== GENSHIN LIGHT (Li Yue Day) ===== */
+/* === GENSHIN LIGHT === */
 body.theme-genshin-light {
-  --red: #4b5366;
-  --red-dim: rgba(75, 83, 102, 0.08);
-  --red-border: rgba(75, 83, 102, 0.2);
+  --bg-primary: #ece5d8;
+  --bg-secondary: #f7f3ed;
+  --bg-card: #ffffff;
+  --bg-nav: rgba(247, 243, 237, 0.85);
   
-  --gold: #8a6820;
-  --gold-dim: rgba(219, 177, 101, 0.12);
-  --gold-border: rgba(219, 177, 101, 0.3);
+  --text-primary: #3d3b40;
+  --text-secondary: #5f5d62;
+  --text-muted: #8f8d92;
   
-  --bg: #ece5d8;
-  --bg2: rgba(255, 255, 255, 0.6);
-  --bg3: rgba(255, 255, 255, 0.8);
+  --accent-primary: #d4af37; /* Gold */
+  --accent-secondary: #a67c00;
+  --accent-gradient: linear-gradient(135deg, #d4af37 0%, #a67c00 100%);
   
-  --border: rgba(219, 177, 101, 0.2);
+  --border-color: rgba(212, 175, 55, 0.3);
+  --shadow-glow: 0 0 10px rgba(212, 175, 55, 0.2);
   
-  --text: #3d4555;
-  --text2: #5f6674;
-  --text3: #9a9faa;
+  --success: #5cb85c;
+  --warning: #f0ad4e;
+  --danger: #d9534f;
   
-  --purple: #7d5a9e;
-  --purple-dim: rgba(125, 90, 158, 0.12);
-  --purple-border: rgba(125, 90, 158, 0.25);
+  --font-family: 'Georgia', 'Times New Roman', serif;
+  --card-radius: 20px;
+  --btn-radius: 25px;
   
-  --font-ui: Georgia, serif;
-  --btn-radius: 20px;
-  --card-radius: 12px;
-  --scan-opacity: 0.005;
+  --scanline-color: transparent;
+  --glyph-color: rgba(212, 175, 55, 0.05);
 }
 
-body.theme-genshin-light .bottom-nav {
-  background: rgba(236, 229, 216, 0.97);
-  border-top-color: rgba(219, 177, 101, 0.25);
-}
-
-body.theme-genshin-light .bottom-nav::before {
-  background: linear-gradient(90deg, transparent, rgba(219, 177, 101, 0.5), transparent);
-}
-
-body.theme-genshin-light .btn-primary {
-  border-radius: 20px;
-  font-family: Georgia, serif;
-  letter-spacing: 0.5px;
-  text-transform: none;
-}
-
-body.theme-genshin-light .page-title {
-  font-family: Georgia, serif;
-}
-
-/* ===== GENSHIN DARK (Li Yue Night) ===== */
+/* === GENSHIN DARK === */
 body.theme-genshin-dark {
-  --red: rgba(219, 177, 101, 0.8);
-  --red-dim: rgba(219, 177, 101, 0.08);
-  --red-border: rgba(219, 177, 101, 0.2);
+  --bg-primary: #1a1628;
+  --bg-secondary: #251e35;
+  --bg-card: #2d243f;
+  --bg-nav: rgba(37, 30, 53, 0.85);
   
-  --gold: rgba(219, 177, 101, 0.9);
-  --gold-dim: rgba(219, 177, 101, 0.1);
-  --gold-border: rgba(219, 177, 101, 0.25);
+  --text-primary: #e8e4ed;
+  --text-secondary: #c8c0d8;
+  --text-muted: #8a809e;
   
-  --bg: #1a1628;
-  --bg2: rgba(255, 255, 255, 0.04);
-  --bg3: rgba(255, 255, 255, 0.07);
+  --accent-primary: #d4af37;
+  --accent-secondary: #a67c00;
+  --accent-gradient: linear-gradient(135deg, #d4af37 0%, #a67c00 100%);
   
-  --border: rgba(219, 177, 101, 0.1);
+  --border-color: rgba(212, 175, 55, 0.3);
+  --shadow-glow: 0 0 10px rgba(212, 175, 55, 0.2);
   
-  --text: #e8e0d0;
-  --text2: #a09880;
-  --text3: #5a5248;
+  --success: #5cb85c;
+  --warning: #f0ad4e;
+  --danger: #d9534f;
   
-  --purple: rgba(155, 89, 182, 0.9);
-  --purple-dim: rgba(155, 89, 182, 0.12);
-  --purple-border: rgba(155, 89, 182, 0.25);
+  --font-family: 'Georgia', 'Times New Roman', serif;
+  --card-radius: 20px;
+  --btn-radius: 25px;
   
-  --font-ui: Georgia, serif;
-  --btn-radius: 20px;
-  --card-radius: 12px;
-  --scan-opacity: 0.02;
-}
-
-body.theme-genshin-dark .bottom-nav {
-  background: rgba(26, 22, 40, 0.97);
-  border-top-color: rgba(219, 177, 101, 0.15);
-}
-
-body.theme-genshin-dark .bottom-nav::before {
-  background: linear-gradient(90deg, transparent, rgba(219, 177, 101, 0.4), transparent);
-}
-
-body.theme-genshin-dark .btn-primary {
-  border-radius: 20px;
-  font-family: Georgia, serif;
-  letter-spacing: 0.5px;
-  text-transform: none;
-}
-
-body.theme-genshin-dark .page-title {
-  font-family: Georgia, serif;
-  text-shadow: none;
-}
-
-/* ===== SCANLINES OVERLAY ===== */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.025) 3px,
-    rgba(0, 0, 0, 0.025) 4px
-  );
-  pointer-events: none;
-  z-index: 0;
-  opacity: var(--scan-opacity);
-}
-
-/* ===== BACKGROUND KANJI ===== */
-.bg-kanji {
-  position: fixed;
-  font-family: serif;
-  pointer-events: none;
-  z-index: 0;
-  line-height: 1;
-  user-select: none;
-  color: rgba(180, 20, 20, 0.03);
-}
-
-/* ===== GLOBAL RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-ui);
-  min-height: 100vh;
-  padding-bottom: var(--nav-h);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--red);
-}
-
-/* ===== SELECTION ===== */
-::selection {
-  background: var(--red-dim);
-  color: var(--text);
-}
-
-/* ===== LINKS ===== */
-a {
-  color: var(--red);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-a:hover {
-  color: var(--gold);
-}
-
-/* ===== BUTTONS BASE ===== */
-button {
-  font-family: var(--font-ui);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: none;
-}
-
-/* ===== INPUTS ===== */
-input, textarea {
-  font-family: var(--font-ui);
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: var(--btn-radius);
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--red-border);
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.1); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 10px var(--red-dim); }
-  50% { box-shadow: 0 0 20px var(--red-dim), 0 0 30px var(--red-dim); }
+  --scanline-color: transparent;
+  --glyph-color: rgba(212, 175, 55, 0.05);
 }
