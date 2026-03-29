@@ -4,13 +4,18 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/zhidao-react/',  // ← Важно: имя твоего репозитория
   server: {
     proxy: {
       '/api': {
         target: 'https://hk.marucho.icu:8443',
         changeOrigin: true,
-        secure: false, // игнорируем самоподписанный сертификат
+        secure: false,
       }
     }
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
   }
 })
