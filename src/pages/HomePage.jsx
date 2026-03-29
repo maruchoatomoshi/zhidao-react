@@ -2,14 +2,11 @@
 import React, { useEffect } from 'react';
 import { useStore } from '../hooks/useStore';
 import { useTelegram } from '../hooks/useTelegram';
-import { IconStar, IconLock, IconCopy, IconMessage } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
+import { IconStar, IconLock, IconRefresh } from '@tabler/icons-react';
 
-// === ИЗОБРАЖЕНИЯ ИЗ РЕПОЗИТОРИЯ ===
 const IMG = {
   logo: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/logo.png',
-  goldCase: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/1774509730760.png',
-  purpleCase: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/purple_case.png',
-  legendaryCase: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/legendary_case.png',
   implantGuanxi: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/guanxi_implant.png',
   implantTerracota: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/armor.png',
   implantRedDragon: 'https://raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/honglong_implant.png',
@@ -29,10 +26,12 @@ const HomePage = () => {
 
   if (isLoading) {
     return (
-      <div className="page-container">
+      <div className="page-container home-page">
+        <div className="header-section">
+          <img src={IMG.logo} alt="ZHIDAO" className="dragon-logo" />
+        </div>
         <div className="loading-spinner">
-          <img src={IMG.logo} alt="ZHIDAO" className="loading-logo" />
-          <p>Загрузка протокола...</p>
+          <p>Загрузка...</p>
           <p className="cn-text">正在加载...</p>
         </div>
       </div>
@@ -41,9 +40,9 @@ const HomePage = () => {
 
   if (error) {
     return (
-      <div className="page-container">
+      <div className="page-container home-page">
         <div className="error-box">
-          <h3>⚠️ Ошибка соединения</h3>
+          <h3>⚠️ Ошибка</h3>
           <p>{error}</p>
           <button onClick={() => userId && fetchProfile(userId)}>Повторить</button>
         </div>
@@ -51,15 +50,11 @@ const HomePage = () => {
     );
   }
 
-  if (!user) return <div className="page-container"><p>Нет данных пользователя.</p></div>;
-
   return (
     <div className="page-container home-page">
       {/* HEADER */}
       <div className="header-section">
-        <div className="logo-container">
-          <img src={IMG.logo} alt="ZHIDAO" className="dragon-logo" />
-        </div>
+        <img src={IMG.logo} alt="ZHIDAO" className="dragon-logo" />
         <h1 className="protocol-title">ZHIDAO</h1>
         <p className="protocol-subtitle">ADVANCED COGNITIVE SOLUTIONS</p>
         <p className="chinese-slogan">智能电子解决方案</p>
@@ -69,21 +64,18 @@ const HomePage = () => {
       </div>
 
       {/* STATS */}
-      <div className="stats-grid">
-        <div className="stat-card primary">
-          <div className="stat-label">信用</div>
-          <div className="stat-value">
-            <span className="points-number">{points}</span>
-            <span className="points-label">// кредиты</span>
-            <IconStar size={16} className="star-icon" />
-          </div>
+      <div className="stats-section">
+        <div className="stat-row">
+          <span className="stat-label">信用</span>
+          <span className="stat-value">
+            {points} <IconStar size={12} className="star-icon" /> // кредиты
+          </span>
         </div>
-        <div className="stat-card secondary">
-          <div className="stat-label">状态</div>
-          <div className="stat-value status-active">
-            <span className="status-dot"></span> АКТИВЕН
-          </div>
-          <div className="stat-subvalue">{points} <IconStar size={12} /></div>
+        <div className="stat-row">
+          <span className="stat-label">状态</span>
+          <span className="stat-value status-active">
+            ● АКТИВЕН
+          </span>
         </div>
       </div>
 
@@ -94,10 +86,14 @@ const HomePage = () => {
         </div>
         <div className="network-card">
           <div className="network-info">
-            <div className="network-username">{user.marzban_username || 'hk_mark'}</div>
+            <div className="network-username">{user?.marzban_username || 'hk_mark'}</div>
             <div className="network-details">HK NODE // 1.81 GB</div>
-            <div className="traffic-bar"><div className="traffic-fill" style={{width:'45%'}}></div></div>
-            <div className="traffic-label">ТРАФИК <span>1.81 GB</span></div>
+            <div className="traffic-bar">
+              <div className="traffic-fill" style={{ width: '45%' }}></div>
+            </div>
+            <div className="traffic-label">
+              <span>ТРАФИК 1.81 GB</span>
+            </div>
           </div>
           <div className="network-actions">
             <button className="btn-config">获取<br/>КОНФИГ</button>
@@ -122,7 +118,7 @@ const HomePage = () => {
           <div className="items-grid">
             {implants.map((item, i) => (
               <div key={i} className="item-card">
-                <img 
+                <img
                   src={
                     item.implant_id === 'implant_guanxi' ? IMG.implantGuanxi :
                     item.implant_id === 'implant_terracota' ? IMG.implantTerracota :
@@ -148,6 +144,17 @@ const HomePage = () => {
             <span className="hint">Открывай фиолетовые и чёрные кейсы!</span>
           </div>
         )}
+      </div>
+
+      {/* NAVIGATION */}
+      <div className="bottom-nav">
+        <Link to="/">主页</Link>
+        <Link to="/leaderboard">排名</Link>
+        <Link to="/schedule">日程</Link>
+        <Link to="/shop">商店</Link>
+        <Link to="/casino">箱子</Link>
+        <Link to="/implants">植入物</Link>
+        <Link to="/more">更多</Link>
       </div>
 
       {/* BG DECOR */}

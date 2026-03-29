@@ -1,165 +1,299 @@
-/* src/theme.css — ZHIDAO Protocol Themes */
+/* ===== ZHIDAO PROTOCOL v2.6.6 — CSS VARIABLES ===== */
+/* Exact copy from index_reference.html */
 
-/* ===== NETWATCH DARK (основная тема) ===== */
-:root,
-body.netwatch-dark {
-  --bg-primary: #050510;
-  --bg-secondary: #0d0d1a;
-  --bg-tertiary: #151525;
-  --text-primary: #e8e6f0;
-  --text-secondary: rgba(232, 230, 240, 0.6);
-  --text-tertiary: rgba(232, 230, 240, 0.3);
-  --border-color: rgba(255, 255, 255, 0.06);
-  --accent-color: #c83232;
-  --accent-border: rgba(200, 50, 50, 0.5);
-  --accent-bg: rgba(200, 50, 50, 0.1);
+:root {
+  /* === NETWATCH DARK (default) === */
+  --red: #cc2200;
+  --red-dim: rgba(180, 20, 20, 0.15);
+  --red-border: rgba(180, 20, 20, 0.35);
+  
   --gold: #d4af37;
-  --gold-border: rgba(212, 175, 55, 0.3);
-  --error: #ff6b6b;
-  --success: #51cf66;
-  --warning: #ffd43b;
+  --gold-dim: rgba(212, 175, 55, 0.1);
+  --gold-border: rgba(212, 175, 55, 0.25);
+  
+  --bg: #050510;
+  --bg2: rgba(255, 255, 255, 0.03);
+  --bg3: rgba(255, 255, 255, 0.06);
+  
+  --border: rgba(255, 255, 255, 0.07);
+  
+  --text: #ffffff;
+  --text2: #cccccc;
+  --text3: #888888;
+  
+  --purple: #9b59b6;
+  --purple-dim: rgba(155, 89, 182, 0.15);
+  --purple-border: rgba(155, 89, 182, 0.3);
+  
+  --blue: #3498db;
+  --blue-dim: rgba(52, 152, 219, 0.15);
+  --blue-border: rgba(52, 152, 219, 0.3);
+  
+  --nav-h: 68px;
+  --font-ui: -apple-system, sans-serif;
+  --btn-radius: 8px;
+  --card-radius: 10px;
+  --scan-opacity: 0.025;
+  
+  /* === SUCCESS / ERROR === */
+  --success: #2ecc71;
+  --error: #ff4444;
 }
 
 /* ===== NETWATCH LIGHT ===== */
-body.netwatch-light {
-  --bg-primary: #f4f1ed;
-  --bg-secondary: #ebe7e0;
-  --bg-tertiary: #ddd8d0;
-  --text-primary: #1a1a2e;
-  --text-secondary: rgba(26, 26, 46, 0.6);
-  --text-tertiary: rgba(26, 26, 46, 0.3);
-  --border-color: rgba(0, 0, 0, 0.08);
-  --accent-color: #c83232;
-  --accent-border: rgba(200, 50, 50, 0.3);
-  --accent-bg: rgba(200, 50, 50, 0.08);
-  --gold: #b8962e;
-  --gold-border: rgba(184, 150, 46, 0.3);
+body.theme-nw-light {
+  --red: #993333;
+  --red-dim: rgba(180, 20, 20, 0.08);
+  --red-border: rgba(180, 20, 20, 0.22);
+  
+  --gold: #7a5010;
+  --gold-dim: rgba(150, 100, 20, 0.1);
+  --gold-border: rgba(150, 100, 20, 0.25);
+  
+  --bg: #f4f1ed;
+  --bg2: rgba(0, 0, 0, 0.03);
+  --bg3: rgba(0, 0, 0, 0.05);
+  
+  --border: rgba(0, 0, 0, 0.08);
+  
+  --text: #1a1a1a;
+  --text2: #555555;
+  --text3: #999999;
+  
+  --scan-opacity: 0.01;
 }
 
-/* ===== GENSHIN LIGHT ===== */
-body.genshin-light {
-  --bg-primary: #ece5d8;
-  --bg-secondary: #e0d9cc;
-  --bg-tertiary: #d4ccbf;
-  --text-primary: #2a2040;
-  --text-secondary: rgba(42, 32, 64, 0.6);
-  --text-tertiary: rgba(42, 32, 64, 0.3);
-  --border-color: rgba(0, 0, 0, 0.08);
-  --accent-color: #d4af37;
-  --accent-border: rgba(212, 175, 55, 0.3);
-  --accent-bg: rgba(212, 175, 55, 0.1);
-  --gold: #d4af37;
-  --gold-border: rgba(212, 175, 55, 0.5);
-  --font-serif: 'Georgia', 'Times New Roman', serif;
+/* ===== GENSHIN LIGHT (Li Yue Day) ===== */
+body.theme-genshin-light {
+  --red: #4b5366;
+  --red-dim: rgba(75, 83, 102, 0.08);
+  --red-border: rgba(75, 83, 102, 0.2);
+  
+  --gold: #8a6820;
+  --gold-dim: rgba(219, 177, 101, 0.12);
+  --gold-border: rgba(219, 177, 101, 0.3);
+  
+  --bg: #ece5d8;
+  --bg2: rgba(255, 255, 255, 0.6);
+  --bg3: rgba(255, 255, 255, 0.8);
+  
+  --border: rgba(219, 177, 101, 0.2);
+  
+  --text: #3d4555;
+  --text2: #5f6674;
+  --text3: #9a9faa;
+  
+  --purple: #7d5a9e;
+  --purple-dim: rgba(125, 90, 158, 0.12);
+  --purple-border: rgba(125, 90, 158, 0.25);
+  
+  --font-ui: Georgia, serif;
+  --btn-radius: 20px;
+  --card-radius: 12px;
+  --scan-opacity: 0.005;
 }
 
-/* ===== GENSHIN DARK ===== */
-body.genshin-dark {
-  --bg-primary: #1a1628;
-  --bg-secondary: #221e33;
-  --bg-tertiary: #2a263d;
-  --text-primary: #e8e0d0;
-  --text-secondary: rgba(232, 224, 208, 0.6);
-  --text-tertiary: rgba(232, 224, 208, 0.3);
-  --border-color: rgba(219, 177, 101, 0.1);
-  --accent-color: #dbb165;
-  --accent-border: rgba(219, 177, 101, 0.3);
-  --accent-bg: rgba(219, 177, 101, 0.1);
-  --gold: #ffd700;
-  --gold-border: rgba(255, 215, 0, 0.3);
-  --font-serif: 'Georgia', 'Times New Roman', serif;
+body.theme-genshin-light .bottom-nav {
+  background: rgba(236, 229, 216, 0.97);
+  border-top-color: rgba(219, 177, 101, 0.25);
 }
 
-/* ===== Базовые стили ===== */
+body.theme-genshin-light .bottom-nav::before {
+  background: linear-gradient(90deg, transparent, rgba(219, 177, 101, 0.5), transparent);
+}
+
+body.theme-genshin-light .btn-primary {
+  border-radius: 20px;
+  font-family: Georgia, serif;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+body.theme-genshin-light .page-title {
+  font-family: Georgia, serif;
+}
+
+/* ===== GENSHIN DARK (Li Yue Night) ===== */
+body.theme-genshin-dark {
+  --red: rgba(219, 177, 101, 0.8);
+  --red-dim: rgba(219, 177, 101, 0.08);
+  --red-border: rgba(219, 177, 101, 0.2);
+  
+  --gold: rgba(219, 177, 101, 0.9);
+  --gold-dim: rgba(219, 177, 101, 0.1);
+  --gold-border: rgba(219, 177, 101, 0.25);
+  
+  --bg: #1a1628;
+  --bg2: rgba(255, 255, 255, 0.04);
+  --bg3: rgba(255, 255, 255, 0.07);
+  
+  --border: rgba(219, 177, 101, 0.1);
+  
+  --text: #e8e0d0;
+  --text2: #a09880;
+  --text3: #5a5248;
+  
+  --purple: rgba(155, 89, 182, 0.9);
+  --purple-dim: rgba(155, 89, 182, 0.12);
+  --purple-border: rgba(155, 89, 182, 0.25);
+  
+  --font-ui: Georgia, serif;
+  --btn-radius: 20px;
+  --card-radius: 12px;
+  --scan-opacity: 0.02;
+}
+
+body.theme-genshin-dark .bottom-nav {
+  background: rgba(26, 22, 40, 0.97);
+  border-top-color: rgba(219, 177, 101, 0.15);
+}
+
+body.theme-genshin-dark .bottom-nav::before {
+  background: linear-gradient(90deg, transparent, rgba(219, 177, 101, 0.4), transparent);
+}
+
+body.theme-genshin-dark .btn-primary {
+  border-radius: 20px;
+  font-family: Georgia, serif;
+  letter-spacing: 0.5px;
+  text-transform: none;
+}
+
+body.theme-genshin-dark .page-title {
+  font-family: Georgia, serif;
+  text-shadow: none;
+}
+
+/* ===== SCANLINES OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.025) 3px,
+    rgba(0, 0, 0, 0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--scan-opacity);
+}
+
+/* ===== BACKGROUND KANJI ===== */
+.bg-kanji {
+  position: fixed;
+  font-family: serif;
+  pointer-events: none;
+  z-index: 0;
+  line-height: 1;
+  user-select: none;
+  color: rgba(180, 20, 20, 0.03);
+}
+
+/* ===== GLOBAL RESET ===== */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
   min-height: 100vh;
+  padding-bottom: var(--nav-h);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Для Genshin тем — используем засечки */
-body.genshin-light,
-body.genshin-dark {
-  font-family: var(--font-serif, 'Georgia', serif);
-}
-
-.app {
-  max-width: 480px;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-
-.page-content {
-  flex: 1;
-  padding-bottom: 70px;
-}
-
-/* ===== Нижняя навигация ===== */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 480px;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 60px;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
-}
-
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: var(--text-tertiary);
-  font-size: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 4px;
-  transition: color 0.3s;
-}
-
-.bottom-nav button.active {
-  color: var(--accent-color);
-}
-
-.bottom-nav button:active {
-  transform: scale(0.95);
-}
-
-/* ===== Скроллбар ===== */
+/* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 3px;
+  background: var(--border);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-tertiary);
+  background: var(--red);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: var(--red-dim);
+  color: var(--text);
+}
+
+/* ===== LINKS ===== */
+a {
+  color: var(--red);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+/* ===== BUTTONS BASE ===== */
+button {
+  font-family: var(--font-ui);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* ===== INPUTS ===== */
+input, textarea {
+  font-family: var(--font-ui);
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: var(--btn-radius);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--red-border);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px var(--red-dim); }
+  50% { box-shadow: 0 0 20px var(--red-dim), 0 0 30px var(--red-dim); }
 }
