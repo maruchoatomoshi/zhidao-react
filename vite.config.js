@@ -3,7 +3,10 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/zhidao-react/',  // ← Вот здесь имя репозитория
+  
+  // 🔥 base должен быть ТОЧНО таким:
+  base: '/zhidao-react/',
+  
   server: {
     proxy: {
       '/api': {
@@ -13,8 +16,17 @@ export default defineConfig({
       }
     }
   },
+  
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    // 🔥 Добавь это:
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    }
   }
 })
