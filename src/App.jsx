@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useStore } from './hooks/useStore';
 import { useTelegram } from './hooks/useTelegram';
@@ -14,7 +14,7 @@ import CasinoPage from './pages/CasinoPage';
 
 const NavBar = () => {
   const location = useLocation();
-  const { theme } = useStore();
+  const theme = useStore(state => state.theme);
 
   const navItems = [
     { path: '/', icon: IconHome, label: 'Главная' },
@@ -42,26 +42,32 @@ const NavBar = () => {
 };
 
 function App() {
-  const { initTelegram, userId } = useTelegram();
-  const { fetchProfile } = useStore();
+  const userId = useTelegram(state => state.userId);
+  const initTelegram = useTelegram(state => state.initTelegram);
+  const fetchProfile = useStore(state => state.fetchProfile);
+  const isLoading = useStore(state => state.isLoading);
 
-  // 1️⃣ Инициализация Telegram (один раз при монтировании)
   useEffect(() => {
-    console.log('[App] initTelegram');
     initTelegram();
-  }, []);
+  }, [initTelegram]);
 
-  // 2️⃣ Загрузка профиля (когда userId появится)
   useEffect(() => {
-    console.log('[App] userId изменился:', userId);
-    
-    if (userId && typeof fetchProfile === 'function') {
-      console.log('[App] Вызываем fetchProfile для:', userId);
+    if (userId) {
       fetchProfile(userId);
-    } else {
-      console.warn('[App] Ждём userId или fetchProfile:', { userId, fetchProfile: typeof fetchProfile });
     }
-  }, [userId]);  // ← ← ← Только userId!
+  }, [userId, fetchProfile]);
+
+  if (isLoading) {
+    return (
+      <div className="page-container">
+        <div className="loading-spinner">
+          <div className="dragon-loader"></div>
+          <p>Загрузка протокола...</p>
+          <p className="cn-text">正在加载...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Router basename="/zhidao-react">

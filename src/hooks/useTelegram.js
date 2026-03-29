@@ -1,52 +1,51 @@
 // src/hooks/useTelegram.js
-import { useEffect, useState, useCallback } from 'react';
+import { create } from 'zustand';
 
-export const useTelegram = () => {
-  const [tg, setTg] = useState(null);
-  const [user, setUser] = useState(null);
-  const [userId, setUserId] = useState(null);  // ← ← ← Отдельное состояние!
-  const [themeParams, setThemeParams] = useState({});
+export const useTelegram = create((set, get) => ({
+  tg: null,
+  user: null,
+  userId: null,
+  themeParams: {},
 
-  useEffect(() => {
+  initTelegram: () => {
     console.log('[useTelegram] Инициализация...');
-    
     const telegram = window.Telegram?.WebApp;
-    
+
     if (telegram) {
       console.log('[useTelegram] Запущено внутри Telegram');
-      setTg(telegram);
-      telegram.expand(); 
-      
-      if (telegram.initDataUnsafe?.user) {
-        console.log('[useTelegram] User из Telegram:', telegram.initDataUnsafe.user);
-        setUser(telegram.initDataUnsafe.user);
-        setUserId(telegram.initDataUnsafe.user.id?.toString());  // ← ← ←
-      }
-
-      setThemeParams(telegram.themeParams);
+      telegram.expand();
       telegram.ready();
+
+      set({
+        tg: telegram,
+        user: telegram.initDataUnsafe?.user || null,
+        userId: telegram.initDataUnsafe?.user?.id?.toString() || null,
+        themeParams: telegram.themeParams || {},
+      });
     } else {
       console.warn('[useTelegram] Telegram WebApp not found. Running in browser mode.');
-      const testUser = { 
-        id: 389741116, 
-        first_name: 'Mark', 
+      const testUser = {
+        id: 389741116,
+        first_name: 'Mark',
         username: 'christianpastor',
-        last_name: ''
+        last_name: '',
       };
       console.log('[useTelegram] Используем тестового пользователя:', testUser);
-      setUser(testUser);
-      setUserId(testUser.id?.toString());  // ← ← ← Устанавливаем userId сразу!
+      set({
+        user: testUser,
+        userId: testUser.id.toString(),
+      });
     }
-  }, []);
+  },
 
-  const hapticFeedback = useCallback((type = 'medium') => {
+  hapticFeedback: (type = 'medium') => {
     const telegram = window.Telegram?.WebApp;
     if (telegram?.HapticFeedback) {
       telegram.HapticFeedback.impactOccurred(type);
     }
-  }, []);
+  },
 
-  const showPopup = useCallback((params, callback) => {
+  showPopup: (params, callback) => {
     const telegram = window.Telegram?.WebApp;
     if (telegram?.showPopup) {
       telegram.showPopup(params, callback);
@@ -54,21 +53,10 @@ export const useTelegram = () => {
       alert(params.message);
       if (callback) callback('ok');
     }
-  }, []);
+  },
 
-  const closeApp = useCallback(() => {
+  closeApp: () => {
     const telegram = window.Telegram?.WebApp;
     if (telegram?.close) telegram.close();
-  }, []);
-
-  return {
-    tg,
-    user,
-    userId,  // ← ← ← Теперь это отдельное состояние!
-    themeParams,
-    hapticFeedback,
-    showPopup,
-    closeApp,
-    isDark: themeParams.bg_color && parseInt(themeParams.bg_color.replace('#', ''), 16) < 0xffffff,
-  };
-};
+  },
+}));
