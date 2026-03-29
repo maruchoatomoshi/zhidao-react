@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useStore } from './hooks/useStore';
 import { useTelegram } from './hooks/useTelegram';
@@ -22,7 +22,7 @@ const NavBar = () => {
     { path: '/schedule', icon: IconCalendar, label: 'Расписание' },
     { path: '/shop', icon: IconShoppingCart, label: 'Магазин' },
     { path: '/implants', icon: IconCpu, label: 'Импланты' },
-    { path: '/casino', icon: IconDice, label: 'Кейсы' },
+    { path: '/casino', icon: IconDice, label: 'Казино' },
   ];
 
   return (
@@ -42,17 +42,21 @@ const NavBar = () => {
 };
 
 function App() {
-  const { initTelegram } = useTelegram();
+  const { initTelegram, userId } = useTelegram();
   const { fetchProfile } = useStore();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log('[App] useEffect запущен, userId:', userId);
     initTelegram();
-    const tg = window.Telegram?.WebApp;
-    const userId = tg?.initDataUnsafe?.user?.id?.toString();
-    if (userId) {
+    
+    // 🔥 ПРОВЕРКА: убеждаемся что fetchProfile - функция
+    if (userId && typeof fetchProfile === 'function') {
+      console.log('[App] Вызываем fetchProfile для:', userId);
       fetchProfile(userId);
+    } else {
+      console.warn('[App] fetchProfile не готов или userId отсутствует');
     }
-  }, [initTelegram, fetchProfile]);
+  }, [initTelegram, userId]);  // ← ← ← Убрали fetchProfile из зависимостей!
 
   return (
     <Router basename="/zhidao-react">

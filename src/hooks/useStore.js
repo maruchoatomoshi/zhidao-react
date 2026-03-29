@@ -47,9 +47,7 @@ export const useStore = create(
       },
 
       updatePoints: (newPoints) => set({ points: newPoints }),
-
       setTheme: (newTheme) => set({ theme: newTheme }),
-
       reset: () => set(initialState),
     }),
     {
