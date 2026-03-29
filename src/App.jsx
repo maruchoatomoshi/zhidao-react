@@ -55,7 +55,7 @@ function App() {
   }, [initTelegram, fetchProfile]);
 
   return (
-    <Router>
+    <Router basename="/zhidao-react">
       <div className="app">
         <main className="main-content">
           <Routes>
