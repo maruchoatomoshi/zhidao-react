@@ -442,3 +442,85 @@
   animation: spin 1s linear infinite;
   margin: 0 auto 20px;
 }
+
+/* === HOME PAGE — ZHIDAO PROTOCOL === */
+.home-page { padding: 20px 15px 80px; }
+
+/* Logo */
+.logo-container { text-align: center; margin-bottom: 10px; }
+.dragon-logo { width: 140px; height: 140px; object-fit: contain; filter: drop-shadow(0 0 20px rgba(200,50,50,0.5)); animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* Title */
+.protocol-title { font-size: 2.2rem; font-weight: 900; text-align: center; background: linear-gradient(135deg, var(--text-primary), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 4px; margin: 5px 0; }
+.protocol-subtitle { font-size: 0.65rem; color: var(--text-secondary); text-align: center; letter-spacing: 3px; margin-bottom: 8px; }
+.chinese-slogan { font-size: 1.1rem; color: var(--gold); text-align: center; margin-bottom: 12px; font-family: 'Noto Sans SC', sans-serif; }
+
+/* Badge */
+.protocol-badge { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 16px; background: rgba(200,50,50,0.15); border: 1px solid var(--accent-border); border-radius: 20px; font-size: 0.7rem; color: var(--accent-color); margin: 0 auto 25px; letter-spacing: 2px; box-shadow: 0 0 15px rgba(200,50,50,0.2); }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.stat-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; text-align: center; position: relative; overflow: hidden; }
+.stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, transparent, var(--accent-color), transparent); }
+.stat-card.primary::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.stat-label { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; font-family: 'Noto Sans SC', sans-serif; }
+.stat-value { font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.points-number { background: linear-gradient(135deg, var(--gold), #ffed4e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.points-label { font-size: 0.65rem; color: var(--text-tertiary); font-weight: 400; }
+.star-icon { color: var(--gold); }
+.status-active { color: var(--accent-color); }
+.status-dot { width: 10px; height: 10px; background: var(--accent-color); border-radius: 50%; box-shadow: 0 0 8px var(--accent-color); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.6; transform:scale(1.2)} }
+.stat-subvalue { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+
+/* Network */
+.section-divider { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0 12px; font-size: 0.8rem; color: var(--accent-color); letter-spacing: 1px; }
+.network-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.network-username { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.network-details { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 8px; letter-spacing: 1px; }
+.traffic-bar { height: 3px; background: var(--bg-tertiary); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+.traffic-fill { height: 100%; background: linear-gradient(90deg, var(--accent-color), var(--gold)); animation: flow 2s ease-in-out infinite; }
+@keyframes flow { 0%,100%{opacity:1} 50%{opacity:.7} }
+.traffic-label { font-size: 0.65rem; color: var(--text-tertiary); display: flex; justify-content: space-between; }
+.traffic-label span { color: var(--gold); }
+.network-actions { display: flex; flex-direction: column; gap: 6px; }
+.btn-config { background: rgba(200,50,50,0.2); border: 1px solid var(--accent-border); color: var(--accent-color); padding: 8px 12px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; cursor: pointer; line-height: 1.2; transition: all .3s; }
+.btn-config:hover { background: rgba(200,50,50,0.3); box-shadow: 0 0 12px rgba(200,50,50,0.4); }
+.btn-help { background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-secondary); width: 36px; height: 36px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all .3s; }
+.btn-help:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Admin button */
+.admin-contact { margin: 20px 0; }
+.btn-admin { width: 100%; background: rgba(200,50,50,0.15); border: 1px solid var(--accent-border); color: var(--accent-color); padding: 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer; letter-spacing: 1px; transition: all .3s; }
+.btn-admin:hover { background: rgba(200,50,50,0.25); box-shadow: 0 0 18px rgba(200,50,50,0.3); }
+
+/* Implants */
+.implants-section { margin: 30px 0; }
+.section-title { font-size: 1.1rem; text-align: center; margin-bottom: 16px; display: flex; flex-direction: column; align-items: center; }
+.cn-subtitle { font-size: 0.75rem; color: var(--text-secondary); font-family: 'Noto Sans SC', sans-serif; margin-top: 4px; }
+.items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+.item-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; text-align: center; transition: all .3s; }
+.item-card:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(200,50,50,0.2); }
+.item-image { width: 80px; height: 80px; object-fit: contain; margin: 0 auto 8px; filter: drop-shadow(0 0 8px rgba(200,50,50,0.3)); }
+.item-name { font-weight: 600; color: var(--accent-color); font-size: 0.85rem; margin-bottom: 4px; }
+.item-durability { font-size: 0.7rem; color: var(--text-secondary); }
+.empty-state { text-align: center; padding: 35px 15px; background: var(--bg-secondary); border: 1px dashed var(--border-color); border-radius: 14px; color: var(--text-secondary); }
+.empty-state svg { margin-bottom: 12px; opacity: .5; }
+.empty-state p { margin: 8px 0 4px; font-weight: 600; }
+.hint { font-size: 0.75rem; opacity: .7; }
+
+/* Loading */
+.loading-logo { width: 100px; height: 100px; margin: 0 auto 20px; animation: spin 2s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg) } }
+.loading-spinner { text-align: center; padding: 40px 20px; }
+.loading-spinner p { margin: 8px 0; }
+.cn-text { font-size: 0.9rem; color: var(--gold); font-family: 'Noto Sans SC', sans-serif; }
+
+/* Error */
+.error-box { background: var(--bg-secondary); border: 1px solid var(--error); border-radius: 14px; padding: 20px; text-align: center; }
+.error-box h3 { color: var(--error); margin-bottom: 10px; }
+.error-box button { margin-top: 15px; background: var(--accent-color); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+
+/* BG decor */
+.bg-decoration { position: fixed; bottom: -60px; right: -40px; font-size: 180px; color: rgba(200,50,50,0.04); pointer-events: none; z-index: 0; font-family: 'Noto Sans SC', sans-serif; }

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/zhidao-react/',
+  base: '/zhidao-react/',  // ← Вот здесь имя репозитория
   server: {
     proxy: {
       '/api': {
