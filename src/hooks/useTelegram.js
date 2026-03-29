@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 export const useTelegram = () => {
   const [tg, setTg] = useState(null);
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);  // ← ← ← Отдельное состояние!
   const [themeParams, setThemeParams] = useState({});
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export const useTelegram = () => {
       if (telegram.initDataUnsafe?.user) {
         console.log('[useTelegram] User из Telegram:', telegram.initDataUnsafe.user);
         setUser(telegram.initDataUnsafe.user);
+        setUserId(telegram.initDataUnsafe.user.id?.toString());  // ← ← ←
       }
 
       setThemeParams(telegram.themeParams);
@@ -33,10 +35,10 @@ export const useTelegram = () => {
       };
       console.log('[useTelegram] Используем тестового пользователя:', testUser);
       setUser(testUser);
+      setUserId(testUser.id?.toString());  // ← ← ← Устанавливаем userId сразу!
     }
   }, []);
 
-  // 🔥 ИСПРАВЛЕНИЕ: используем window.Telegram напрямую + useCallback
   const hapticFeedback = useCallback((type = 'medium') => {
     const telegram = window.Telegram?.WebApp;
     if (telegram?.HapticFeedback) {
@@ -62,7 +64,7 @@ export const useTelegram = () => {
   return {
     tg,
     user,
-    userId: user?.id?.toString(),
+    userId,  // ← ← ← Теперь это отдельное состояние!
     themeParams,
     hapticFeedback,
     showPopup,
