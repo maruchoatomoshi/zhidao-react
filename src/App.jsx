@@ -45,18 +45,23 @@ function App() {
   const { initTelegram, userId } = useTelegram();
   const { fetchProfile } = useStore();
 
+  // 1️⃣ Инициализация Telegram (один раз при монтировании)
   useEffect(() => {
-    console.log('[App] useEffect запущен, userId:', userId);
+    console.log('[App] initTelegram');
     initTelegram();
+  }, []);
+
+  // 2️⃣ Загрузка профиля (когда userId появится)
+  useEffect(() => {
+    console.log('[App] userId изменился:', userId);
     
-    // 🔥 ПРОВЕРКА: убеждаемся что fetchProfile - функция
     if (userId && typeof fetchProfile === 'function') {
       console.log('[App] Вызываем fetchProfile для:', userId);
       fetchProfile(userId);
     } else {
-      console.warn('[App] fetchProfile не готов или userId отсутствует');
+      console.warn('[App] Ждём userId или fetchProfile:', { userId, fetchProfile: typeof fetchProfile });
     }
-  }, [initTelegram, userId]);  // ← ← ← Убрали fetchProfile из зависимостей!
+  }, [userId]);  // ← ← ← Только userId!
 
   return (
     <Router basename="/zhidao-react">
