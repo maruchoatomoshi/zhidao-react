@@ -4,38 +4,69 @@
 Telegram Mini App для группы российских школьников на языковой поездке в Пекине (3–27 июля 2026). Геймификация дисциплины + изучение китайского. Тематика: NetWatch/Cyberpunk 2077 + традиционный Китай + Genshin Impact.
 
 ## Задача
-Перенос работающего HTML-приложения (`reference/index.html`) на React+Vite. Бэкенд НЕ ТРОГАТЬ — он уже работает. Только фронтенд.
+Перенос HTML-приложения v2.6.6 (`reference/index.html`, 3800+ строк) на React+Vite. Бэкенд НЕ ТРОГАТЬ. Только фронтенд.
 
 ## Стек
 - React 19 + Vite 8
 - Zustand (глобальный стейт)
 - react-router-dom
-- @tabler/icons-react (иконки — tabler)
+- @tabler/icons-react
 - CSS переменные для 4 тем (БЕЗ CSS-in-JS, БЕЗ Tailwind)
-- Деплой: GitHub Pages
+- GitHub Pages + GitHub Actions (автодеплой настроен)
+
+## ⚠️ КРИТИЧЕСКИЕ НАСТРОЙКИ — НЕ МЕНЯТЬ
+- `base: '/zhidao-react/'` в vite.config.js — без этого 404 на GitHub Pages
+- `.github/workflows/deploy.yml` — автодеплой при git push
+- Перед пушем всегда: `npm run build` локально
+
+## Деплой
+- **URL:** https://maruchoatomoshi.github.io/zhidao-react/
+- **Репозиторий:** maruchoatomoshi/zhidao-react
+- **Ассеты (картинки):** из репозитория `zhidao-protocol` через raw.githubusercontent.com
 
 ## Бэкенд
 - FastAPI: `https://hk.marucho.icu:8443`
-- Авторизация через `telegram_id` в теле запроса или заголовке `x-telegram-id`
-- Админы передают `x-admin-id` в заголовке
+- Авторизация: `telegram_id` в теле запроса или `x-telegram-id` в заголовке
+- Админы: `x-admin-id` в заголовке
 - SQLite БД на сервере
 
 ## Админы (telegram_id)
 - 389741116 — Марк (разработчик)
-- 244487659 — МЮ / Михаил Юрьевич (руководитель)
+- 244487659 — МЮ (руководитель)
 - 1190015933 — Лиза (вожатая)
 - 491711713 — Юля (вожатая)
 
-## Навигация (7 табов внизу)
+## Навигация (7 табов)
 1. 🏠 Главная (home) — 首页
 2. 📅 日程 (schedule) — расписание + объявления
 3. 🏆 Рейтинг (leaderboard) — 排名
-4. 🏪 Магазин (shop) — 商店 (вкладки: товары / инвентарь)
-5. 🎰 Кейсы (casino) — 运气 (NetWatch) / Молитвы (Genshin)
-6. ⚡ Импланты (implants) — 植入体 (NetWatch) / Карточки (Genshin)
+4. 🏪 Магазин (shop) — 商店
+5. 🎰 Кейсы (casino) — 运气 / Молитвы (Genshin)
+6. ⚡ Импланты (implants) — 植入体 / Карточки (Genshin)
 7. ≡ Ещё (more) — темы, погода, стирка/вода, новости, достижения, команда, админка
 
-## API эндпоинты (из HTML-кода)
+## Изображения (raw.githubusercontent.com/maruchoatomoshi/zhidao-protocol/main/)
+| Файл | Назначение |
+|------|-----------|
+| logo.png | Логотип приложения |
+| 1774509730760.png | Золотой кейс |
+| purple_case.png | Фиолетовый кейс |
+| legendary_case.png | Легендарный (чёрный) кейс |
+| guanxi_implant.png | Имплант Гуаньси |
+| armor.png | Имплант Терракота |
+| honglong_implant.png | Имплант Красный Дракон |
+| card_zhongli.png | Карточка 岩王帝君 5★ |
+| card_star.png | Карточка 紫微星君 5★ |
+| card_pyro.png | Карточка 焰莲使者 4★ |
+| card_fox.png | Карточка 九尾狐灵 4★ |
+| card_fairy.png | Карточка 桃花仙子 4★ |
+| card_literature.png | Карточка 文曲星君 4★ |
+| card_forest.png | Карточка 木灵仙君 4★ |
+| card_sea.png | Карточка 海灵仙后 4★ |
+| logo_genshintheme.png | Логотип для Genshin-темы |
+| logo_genshintheme_nobackground.png | Логотип Genshin без фона |
+
+## API эндпоинты
 ```
 GET  /api/user/{telegram_id}         — профиль, баллы, статусы, gender
 GET  /api/leaderboard                — [{telegram_id, full_name, points, has_title, implants}]
@@ -85,100 +116,93 @@ POST /api/admin/freeze               — {telegram_id, frozen}, header x-admin-i
 
 ## 4 темы (CSS классы на body)
 - По умолчанию: NetWatch Dark (без класса)
-- `theme-nw-light`: светлый NetWatch
+- `theme-nw-light`: NetWatch Light
 - `theme-genshin-light`: Genshin Light (Georgia, radius 20px, фон #ece5d8)
 - `theme-genshin-dark`: Genshin Dark (фон #1a1628, золотые акценты)
 
-Сохранение: `tg.CloudStorage.setItem('zhidao_theme', theme)` + localStorage fallback.
-При Genshin-темах: Кейсы→Молитвы, Импланты→Карточки, меняются иконки.
+Сохранение: tg.CloudStorage + localStorage fallback.
+При Genshin-темах: Кейсы→Молитвы, Импланты→Карточки, иконки меняются.
 
-## Ключевые UI-паттерны (воспроизвести из HTML)
-- Фоновые плавающие иероглифы (декоративные, pointer-events:none)
-- Сканлайны поверх фона (body::before, repeating-linear-gradient)
-- Градиентные разделители с китайским текстом (cn-divider)
-- Карточки с верхней светящейся линией (card::before gradient)
-- Кнопки с анимацией sweep (btn-primary::after)
-- Нижняя навигация с backdrop-filter blur
-- HapticFeedback: tg.HapticFeedback.impactOccurred('medium')
-- Конфетти при выигрышах (canvas-based)
+## UI-паттерны из HTML (воспроизвести)
+- Плавающие иероглифы на фоне
+- Сканлайны (body::before)
+- Градиентные разделители cn-divider
+- Карточки с верхней светящейся линией
+- Кнопки с анимацией sweep
+- Навбар с backdrop-filter blur
+- HapticFeedback на действиях
+- Конфетти (canvas) при выигрышах
 
-## Кейсы — рулетка
+## Кейсы (casino)
 - Золотой 78.9%, фиолетовый 21%, чёрный 0.1%
-- Анимация барабана с замедлением
-- Фулскрин оверлей результата + конфетти
-- Лимит 3/день, доп кейс за 200★
-- BlackWall и заморозка блокируют доступ
+- Рулетка-барабан с замедлением
+- Фулскрин оверлей + конфетти
+- Лимит 3/день, доп за 200★
+- BlackWall/заморозка блокируют
 
-## Молитвы — Genshin
+## Молитвы (Genshin-тема casino)
 - Синий 79%, фиолетовый 20%, золотой 1%
-- Анимация: вихрь → вспышка → лучи → карточка рубашкой → 3D переворот
+- Вихрь → вспышка → лучи → карточка → 3D переворот
 - Лимит 3/день
 
 ## Карточки (9 шт)
-| card_id | Название | ★ | Пассивка |
-|---------|----------|---|---------|
-| card_zhongli | 岩王帝君 | 5 | Блок штрафа + -5% магазин |
-| card_star | 紫微星君 | 5 | Передать штраф другому |
-| card_pyro | 焰莲使者 | 4 | +50★ после штрафа |
-| card_fox | 九尾狐灵 | 4 | Перекрутить неудачный приз |
-| card_fairy | 桃花仙子 | 4 | +30★ отряду на перекличке |
-| card_literature | 文曲星君 | 4 | +25★ за отчёт |
-| card_forest | 木灵仙君 | 4 | +10★ за день вовремя |
-| card_sea | 海灵仙后 | 4 | Каждые 3 молитвы +30★ |
-| card_moon | 嫦娥仙子 | 4 | Дубль даёт +50★ |
+| card_id | Название | ★ |
+|---------|----------|---|
+| card_zhongli | 岩王帝君 | 5 |
+| card_star | 紫微星君 | 5 |
+| card_pyro | 焰莲使者 | 4 |
+| card_fox | 九尾狐灵 | 4 |
+| card_fairy | 桃花仙子 | 4 |
+| card_literature | 文曲星君 | 4 |
+| card_forest | 木灵仙君 | 4 |
+| card_sea | 海灵仙后 | 4 |
+| card_moon | 嫦娥仙子 | 4 |
 
 ## Импланты (3 шт)
-- `implant_guanxi` 关系 — -10% магазин, фиолетовый кейс
-- `implant_terracota` 兵马俑 — блок штрафа, фиолетовый кейс
-- `implant_red_dragon` 红龙 — +20% баллов + красный ник, чёрный кейс
-Прочность: 3 точки, уменьшается при использовании.
-
-## Магазин
-Категории: privilege, social, food, vip
-Инвентарь: использовать / подарить / продать (50%)
-Заморозка аккаунта блокирует магазин.
+- implant_guanxi 关系 — -10% магазин
+- implant_terracota 兵马俑 — блок штрафа
+- implant_red_dragon 红龙 — +20% баллов + красный ник
 
 ## Рейд на Альфабосса
 - Взнос 50★, победа 60% → +150★
-- Мин 3 игрока, макс 2 рейда/день
-- МЮ (244487659) — 999999★ вне зачёта
+- Мин 3 игрока, макс 2/день
 
-## Достижения (14 SVG-иконок)
+## Достижения (14 шт с SVG-иконками)
 early_bird, iron_mode, legend, curious, polyglot, explorer, brave, exemplary, helper, dragon, night_watch, master, gambler, lucky
 
 ## Telegram WebApp
 ```javascript
 const tg = window.Telegram?.WebApp;
 const user = tg?.initDataUnsafe?.user;
-const telegram_id = user?.id;
 // CloudStorage, HapticFeedback, showPopup, showAlert
-// Всегда делать fallback для тестирования в браузере
+// Всегда fallback для тестирования в браузере
 ```
 
 ## Правила кода
-- Интерфейс: русский + 中文 иероглифы
+- Интерфейс: русский + 中文
 - Комментарии: на русском
 - Функциональные компоненты + хуки
-- CSS классы + переменные (theme.css), НЕ inline
-- `window.Telegram?.WebApp` — безопасный доступ
+- CSS классы + переменные, НЕ inline
 - try/catch на все fetch
 - НЕ менять бэкенд
-- Референс: `reference/index.html`
+- Референс: reference/index.html
 
-## Текущий статус
-- [x] App.jsx — скелет навигации
+## ✅ Текущий статус (что готово)
+- [x] GitHub Actions автодеплой
+- [x] vite.config.js с правильным base
+- [x] App.jsx — навигация
+- [x] App.css — стили NetWatch (неон, анимации, градиенты)
 - [x] theme.css — CSS переменные 4 тем
-- [ ] api/client.js
-- [ ] hooks/useTelegram.js
-- [ ] hooks/useStore.js
-- [ ] Все страницы
+- [x] HomePage.jsx — логотип, статистика, нейролинк, импланты (визуально)
+- [x] useStore.js — Zustand стор (базовый)
+- [x] useTelegram.js — Telegram WebApp хук (базовый)
 
-## Порядок разработки
-1. Фундамент: api/client.js + useTelegram.js + useStore.js
-2. HomePage — профиль, баллы, статусы, импланты
-3. LeaderboardPage — рейтинг
-4. SchedulePage — расписание + объявления
-5. ShopPage — товары + инвентарь
-6. CasinoPage — кейсы/молитвы с анимациями
-7. ImplantsPage — импланты/карточки
-8. MorePage — темы, погода, стирка, достижения, админка
+## 🔲 Что нужно делать дальше
+1. LeaderboardPage.jsx — рейтинг с цветными никами
+2. SchedulePage.jsx — расписание + объявления + реакции
+3. ShopPage.jsx — товары (категории) + инвентарь (использовать/подарить/продать)
+4. CasinoPage.jsx — кейсы с рулеткой + молитвы Genshin с анимациями
+5. ImplantsPage.jsx — импланты с прочностью + каталог карточек
+6. MorePage.jsx — темы, погода, курс юаня, стирка/вода, достижения, команда, админка
+7. Проверить и доработать api/client.js — все эндпоинты
+8. Проверить useStore.js — все стейты и экшены

@@ -1,53 +1,76 @@
-import { useState, useEffect } from 'react'
-import { useTelegram } from './hooks/useTelegram'
-import { useStore } from './hooks/useStore'
-import HomePage from './pages/HomePage'
-import LeaderboardPage from './pages/LeaderboardPage'
-import './App.css'
-import './theme.css'
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { useStore } from './hooks/useStore';
+import { useTelegram } from './hooks/useTelegram';
+import { IconHome, IconTrophy, IconCalendar, IconShoppingCart, IconCpu, IconDice } from '@tabler/icons-react';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-  const { userId } = useTelegram()
-  const { fetchProfile } = useStore()
+import HomePage from './pages/HomePage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import SchedulePage from './pages/SchedulePage';
+import ShopPage from './pages/ShopPage';
+import ImplantsPage from './pages/ImplantsPage';
+import CasinoPage from './pages/CasinoPage';
 
-  useEffect(() => {
-    if (userId) {
-      fetchProfile(userId)
-    }
-  }, [userId, fetchProfile])
+const NavBar = () => {
+  const location = useLocation();
+  const { theme } = useStore();
 
-  const renderPage = () => {
-    if (currentPage === 'home') {
-      return <HomePage />
-    }
-    if (currentPage === 'leaderboard') {
-      return <LeaderboardPage />
-    }
-    return (
-      <div className="page-container">
-        <h2>Страница в разработке: {currentPage}</h2>
-      </div>
-    )
-  }
+  const navItems = [
+    { path: '/', icon: IconHome, label: 'Главная' },
+    { path: '/leaderboard', icon: IconTrophy, label: 'Рейтинг' },
+    { path: '/schedule', icon: IconCalendar, label: 'Расписание' },
+    { path: '/shop', icon: IconShoppingCart, label: 'Магазин' },
+    { path: '/implants', icon: IconCpu, label: 'Импланты' },
+    { path: '/casino', icon: IconDice, label: 'Кейсы' },
+  ];
 
   return (
-    <div className="app">
-      <div className="page-content">
-        {renderPage()}
-      </div>
+    <nav className={`nav-bar ${theme === 'genshin' ? 'nav-genshin' : 'nav-netwatch'}`}>
+      {navItems.map((item) => {
+        const Icon = item.icon;
+        const isActive = location.pathname === item.path;
+        return (
+          <Link key={item.path} to={item.path} className={`nav-item ${isActive ? 'active' : ''}`}>
+            <Icon size={20} />
+            <span>{item.label}</span>
+          </Link>
+        );
+      })}
+    </nav>
+  );
+};
 
-      <nav className="bottom-nav">
-        <button className={currentPage === 'home' ? 'active' : ''} onClick={() => setCurrentPage('home')}>🏠 主页</button>
-        <button className={currentPage === 'schedule' ? 'active' : ''} onClick={() => setCurrentPage('schedule')}>📅 日程</button>
-        <button className={currentPage === 'leaderboard' ? 'active' : ''} onClick={() => setCurrentPage('leaderboard')}>🏆 排名</button>
-        <button className={currentPage === 'shop' ? 'active' : ''} onClick={() => setCurrentPage('shop')}>🛒 商店</button>
-        <button className={currentPage === 'casino' ? 'active' : ''} onClick={() => setCurrentPage('casino')}>📦 箱子</button>
-        <button className={currentPage === 'implants' ? 'active' : ''} onClick={() => setCurrentPage('implants')}>⚡ 植入物</button>
-        <button className={currentPage === 'more' ? 'active' : ''} onClick={() => setCurrentPage('more')}>☰ 更多</button>
-      </nav>
-    </div>
-  )
+function App() {
+  const { initTelegram } = useTelegram();
+  const { fetchProfile } = useStore();
+
+  React.useEffect(() => {
+    initTelegram();
+    const tg = window.Telegram?.WebApp;
+    const userId = tg?.initDataUnsafe?.user?.id?.toString();
+    if (userId) {
+      fetchProfile(userId);
+    }
+  }, [initTelegram, fetchProfile]);
+
+  return (
+    <Router>
+      <div className="app">
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
+            <Route path="/schedule" element={<SchedulePage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/implants" element={<ImplantsPage />} />
+            <Route path="/casino" element={<CasinoPage />} />
+          </Routes>
+        </main>
+        <NavBar />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
